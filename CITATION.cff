@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software or experimental protocol, please cite it as below."
+title: "Proyecto Prisma: Plataforma de Adquisición de Vocabulario y Estructuras en L2 mediante Estimulación Audiovisual Sincronizada y FSRS-7"
+authors:
+  - family-names: "DarckRovert"
+    given-names: ""
+version: "0.1.0"
+date-released: 2026-11-05
+license: "MIT"
+repository-code: "https://github.com/DarckRovert/proyecto-prisma"
+keywords:
+  - "cognitive science"
+  - "spaced repetition"
+  - "FSRS"
+  - "dual coding"
+  - "active recall"
+  - "edtech"
