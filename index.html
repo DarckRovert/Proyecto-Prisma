@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto Prisma — Banco de Calibración Audiovisual</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --success: #34d399;
+      --danger: #f87171;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    .header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.025em;
+    }
+    .header p {
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-top: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background: #020617;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .metric-val {
+      font-family: ui-monospace, monospace;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    .btn:hover { background: #334155; }
+    .btn-primary {
+      background: #0284c7;
+      border-color: #0369a1;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #0369a1; }
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .control-row {
+      margin-top: 10px;
+    }
+    .control-row label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+    .log-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.75rem;
+      font-family: ui-monospace, monospace;
+      margin-top: 8px;
+    }
+    .log-table th {
+      text-align: left;
+      padding: 4px 6px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+    }
+    .log-table td {
+      padding: 4px 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .badge-ok { background: rgba(52, 211, 153, 0.2); color: var(--success); }
+    .badge-warn { background: rgba(248, 113, 113, 0.2); color: var(--danger); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>PROYECTO PRISMA — BANCO DE CALIBRACIÓN AV</h1>
+    <p>Validación de latencia de hardware, detección de FPS de pantalla y sincronización milimétrica</p>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="card">
+        <div class="card-title">
+          <span>Monitor de Renderizado de Estímulos</span>
+          <span id="canvas-status" style="font-size: 0.75rem; font-weight: normal; color: var(--muted);">Listo</span>
+        </div>
+        <div class="canvas-container">
+          <canvas id="stimulus-canvas"></canvas>
+        </div>
+        <div class="btn-group" style="margin-top: 12px;">
+          <button id="btn-flash-beep" class="btn btn-primary">⚡ Flash + Beep Sincronizado</button>
+          <button id="btn-demo-stimulus" class="btn">👁️ Estímulo Dual-Coding Demo</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Historial de Sincronización (Últimos Ensayos)</div>
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Refresco</th>
+              <th>Audio Target</th>
+              <th>Visual Target</th>
+              <th>Drift Medido</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="log-tbody">
+            <tr>
+              <td colspan="6" style="text-align: center; color: var(--muted);">Presiona "Flash + Beep" para iniciar mediciones.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">Hardware & Reloj</div>
+        <button id="btn-unlock-audio" class="btn btn-primary" style="margin-bottom: 12px;">🔊 Activar Audio & Calibrar</button>
+        
+        <div class="metric-row">
+          <span>Tasa de Refresco:</span>
+          <span class="metric-val" id="metric-fps">Calculando...</span>
+        </div>
+        <div class="metric-row">
+          <span>Ventana de Frame:</span>
+          <span class="metric-val" id="metric-frame-budget">--</span>
+        </div>
+        <div class="metric-row">
+          <span>Audio baseLatency:</span>
+          <span class="metric-val" id="metric-base-latency">--</span>
+        </div>
+        <div class="metric-row">
+          <span>Audio outputLatency:</span>
+          <span class="metric-val" id="metric-output-latency">--</span>
+        </div>
+        <div class="metric-row">
+          <span>Latencia HW Total:</span>
+          <span class="metric-val" id="metric-total-latency">--</span>
+        </div>
+        <div class="metric-row">
+          <span>Alerta Bluetooth:</span>
+          <span class="metric-val" id="metric-bluetooth">No detectado</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Audio de Enfoque</div>
+        
+        <div class="control-row">
+          <button id="btn-toggle-pink" class="btn">Ruido Rosa: OFF</button>
+          <label>Volumen Ruido Rosa (dB)</label>
+          <input type="range" id="slider-pink" min="-36" max="-6" value="-18" step="1" />
+        </div>
+
+        <div class="control-row" style="margin-top: 14px;">
+          <button id="btn-toggle-binaural" class="btn">Beta 20Hz: OFF</button>
+          <label>Volumen Binaural (dB)</label>
+          <input type="range" id="slider-binaural" min="-36" max="-10" value="-22" step="1" />
+        </div>
+
+        <div style="margin-top: 16px;">
+          <button id="btn-test-stereo" class="btn">🎧 Verificar Canales L / R</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
