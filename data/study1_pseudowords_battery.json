@@ -1,0 +1,722 @@
+[
+  {
+    "text": "het",
+    "ipa": "/h\u025bt/",
+    "pattern": "CVC",
+    "id": "pseudo_001"
+  },
+  {
+    "text": "klamat",
+    "ipa": "/\u02c8kl\u00e6.m\u00e6t/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_002"
+  },
+  {
+    "text": "tob",
+    "ipa": "/t\u0251b/",
+    "pattern": "CVC",
+    "id": "pseudo_003"
+  },
+  {
+    "text": "roltub",
+    "ipa": "/\u02c8r\u0251l.t\u028cb/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_004"
+  },
+  {
+    "text": "kap",
+    "ipa": "/k\u00e6p/",
+    "pattern": "CVC",
+    "id": "pseudo_005"
+  },
+  {
+    "text": "pezzim",
+    "ipa": "/\u02c8p\u025bz.z\u026am/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_006"
+  },
+  {
+    "text": "wim",
+    "ipa": "/w\u026am/",
+    "pattern": "CVC",
+    "id": "pseudo_007"
+  },
+  {
+    "text": "lumud",
+    "ipa": "/\u02c8l\u028c.m\u028cd/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_008"
+  },
+  {
+    "text": "kaf",
+    "ipa": "/k\u00e6f/",
+    "pattern": "CVC",
+    "id": "pseudo_009"
+  },
+  {
+    "text": "fephob",
+    "ipa": "/\u02c8f\u025bp.h\u0251b/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_010"
+  },
+  {
+    "text": "pap",
+    "ipa": "/p\u00e6p/",
+    "pattern": "CVC",
+    "id": "pseudo_011"
+  },
+  {
+    "text": "lemrub",
+    "ipa": "/\u02c8l\u025bm.r\u028cb/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_012"
+  },
+  {
+    "text": "hak",
+    "ipa": "/h\u00e6k/",
+    "pattern": "CVC",
+    "id": "pseudo_013"
+  },
+  {
+    "text": "klebben",
+    "ipa": "/\u02c8kl\u025bb.b\u025bn/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_014"
+  },
+  {
+    "text": "zuz",
+    "ipa": "/z\u028cz/",
+    "pattern": "CVC",
+    "id": "pseudo_015"
+  },
+  {
+    "text": "wullen",
+    "ipa": "/\u02c8w\u028cl.l\u025bn/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_016"
+  },
+  {
+    "text": "kim",
+    "ipa": "/k\u026am/",
+    "pattern": "CVC",
+    "id": "pseudo_017"
+  },
+  {
+    "text": "flutub",
+    "ipa": "/\u02c8fl\u028c.t\u028cb/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_018"
+  },
+  {
+    "text": "zef",
+    "ipa": "/z\u025bf/",
+    "pattern": "CVC",
+    "id": "pseudo_019"
+  },
+  {
+    "text": "kahup",
+    "ipa": "/\u02c8k\u00e6.h\u028cp/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_020"
+  },
+  {
+    "text": "bip",
+    "ipa": "/b\u026ap/",
+    "pattern": "CVC",
+    "id": "pseudo_021"
+  },
+  {
+    "text": "zofim",
+    "ipa": "/\u02c8z\u0251.f\u026am/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_022"
+  },
+  {
+    "text": "dul",
+    "ipa": "/d\u028cl/",
+    "pattern": "CVC",
+    "id": "pseudo_023"
+  },
+  {
+    "text": "wadbon",
+    "ipa": "/\u02c8w\u00e6d.b\u0251n/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_024"
+  },
+  {
+    "text": "bov",
+    "ipa": "/b\u0251v/",
+    "pattern": "CVC",
+    "id": "pseudo_025"
+  },
+  {
+    "text": "humsid",
+    "ipa": "/\u02c8h\u028cm.s\u026ad/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_026"
+  },
+  {
+    "text": "vup",
+    "ipa": "/v\u028cp/",
+    "pattern": "CVC",
+    "id": "pseudo_027"
+  },
+  {
+    "text": "rakrod",
+    "ipa": "/\u02c8r\u00e6k.r\u0251d/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_028"
+  },
+  {
+    "text": "pam",
+    "ipa": "/p\u00e6m/",
+    "pattern": "CVC",
+    "id": "pseudo_029"
+  },
+  {
+    "text": "grusnev",
+    "ipa": "/\u02c8gr\u028cs.n\u025bv/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_030"
+  },
+  {
+    "text": "tez",
+    "ipa": "/t\u025bz/",
+    "pattern": "CVC",
+    "id": "pseudo_031"
+  },
+  {
+    "text": "bresfoz",
+    "ipa": "/\u02c8br\u025bs.f\u0251z/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_032"
+  },
+  {
+    "text": "gan",
+    "ipa": "/g\u00e6n/",
+    "pattern": "CVC",
+    "id": "pseudo_033"
+  },
+  {
+    "text": "drivtel",
+    "ipa": "/\u02c8dr\u026av.t\u025bl/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_034"
+  },
+  {
+    "text": "nak",
+    "ipa": "/n\u00e6k/",
+    "pattern": "CVC",
+    "id": "pseudo_035"
+  },
+  {
+    "text": "drastim",
+    "ipa": "/\u02c8dr\u00e6s.t\u026am/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_036"
+  },
+  {
+    "text": "nen",
+    "ipa": "/n\u025bn/",
+    "pattern": "CVC",
+    "id": "pseudo_037"
+  },
+  {
+    "text": "truvzap",
+    "ipa": "/\u02c8tr\u028cv.z\u00e6p/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_038"
+  },
+  {
+    "text": "ziz",
+    "ipa": "/z\u026az/",
+    "pattern": "CVC",
+    "id": "pseudo_039"
+  },
+  {
+    "text": "povpem",
+    "ipa": "/\u02c8p\u0251v.p\u025bm/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_040"
+  },
+  {
+    "text": "hok",
+    "ipa": "/h\u0251k/",
+    "pattern": "CVC",
+    "id": "pseudo_041"
+  },
+  {
+    "text": "prummum",
+    "ipa": "/\u02c8pr\u028cm.m\u028cm/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_042"
+  },
+  {
+    "text": "pun",
+    "ipa": "/p\u028cn/",
+    "pattern": "CVC",
+    "id": "pseudo_043"
+  },
+  {
+    "text": "gasdub",
+    "ipa": "/\u02c8g\u00e6s.d\u028cb/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_044"
+  },
+  {
+    "text": "mop",
+    "ipa": "/m\u0251p/",
+    "pattern": "CVC",
+    "id": "pseudo_045"
+  },
+  {
+    "text": "gubul",
+    "ipa": "/\u02c8g\u028c.b\u028cl/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_046"
+  },
+  {
+    "text": "bel",
+    "ipa": "/b\u025bl/",
+    "pattern": "CVC",
+    "id": "pseudo_047"
+  },
+  {
+    "text": "nedzab",
+    "ipa": "/\u02c8n\u025bd.z\u00e6b/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_048"
+  },
+  {
+    "text": "gol",
+    "ipa": "/g\u0251l/",
+    "pattern": "CVC",
+    "id": "pseudo_049"
+  },
+  {
+    "text": "gramdef",
+    "ipa": "/\u02c8gr\u00e6m.d\u025bf/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_050"
+  },
+  {
+    "text": "lab",
+    "ipa": "/l\u00e6b/",
+    "pattern": "CVC",
+    "id": "pseudo_051"
+  },
+  {
+    "text": "gruppiz",
+    "ipa": "/\u02c8gr\u028cp.p\u026az/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_052"
+  },
+  {
+    "text": "hep",
+    "ipa": "/h\u025bp/",
+    "pattern": "CVC",
+    "id": "pseudo_053"
+  },
+  {
+    "text": "stasnam",
+    "ipa": "/\u02c8st\u00e6s.n\u00e6m/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_054"
+  },
+  {
+    "text": "piv",
+    "ipa": "/p\u026av/",
+    "pattern": "CVC",
+    "id": "pseudo_055"
+  },
+  {
+    "text": "pizdem",
+    "ipa": "/\u02c8p\u026az.d\u025bm/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_056"
+  },
+  {
+    "text": "wed",
+    "ipa": "/w\u025bd/",
+    "pattern": "CVC",
+    "id": "pseudo_057"
+  },
+  {
+    "text": "tilbes",
+    "ipa": "/\u02c8t\u026al.b\u025bs/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_058"
+  },
+  {
+    "text": "giv",
+    "ipa": "/g\u026av/",
+    "pattern": "CVC",
+    "id": "pseudo_059"
+  },
+  {
+    "text": "zabduz",
+    "ipa": "/\u02c8z\u00e6b.d\u028cz/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_060"
+  },
+  {
+    "text": "sel",
+    "ipa": "/s\u025bl/",
+    "pattern": "CVC",
+    "id": "pseudo_061"
+  },
+  {
+    "text": "tramzet",
+    "ipa": "/\u02c8tr\u00e6m.z\u025bt/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_062"
+  },
+  {
+    "text": "kam",
+    "ipa": "/k\u00e6m/",
+    "pattern": "CVC",
+    "id": "pseudo_063"
+  },
+  {
+    "text": "bemmit",
+    "ipa": "/\u02c8b\u025bm.m\u026at/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_064"
+  },
+  {
+    "text": "guz",
+    "ipa": "/g\u028cz/",
+    "pattern": "CVC",
+    "id": "pseudo_065"
+  },
+  {
+    "text": "drobzes",
+    "ipa": "/\u02c8dr\u0251b.z\u025bs/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_066"
+  },
+  {
+    "text": "rul",
+    "ipa": "/r\u028cl/",
+    "pattern": "CVC",
+    "id": "pseudo_067"
+  },
+  {
+    "text": "gromwon",
+    "ipa": "/\u02c8gr\u0251m.w\u0251n/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_068"
+  },
+  {
+    "text": "huz",
+    "ipa": "/h\u028cz/",
+    "pattern": "CVC",
+    "id": "pseudo_069"
+  },
+  {
+    "text": "gipvaz",
+    "ipa": "/\u02c8g\u026ap.v\u00e6z/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_070"
+  },
+  {
+    "text": "gid",
+    "ipa": "/g\u026ad/",
+    "pattern": "CVC",
+    "id": "pseudo_071"
+  },
+  {
+    "text": "promlus",
+    "ipa": "/\u02c8pr\u0251m.l\u028cs/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_072"
+  },
+  {
+    "text": "zeb",
+    "ipa": "/z\u025bb/",
+    "pattern": "CVC",
+    "id": "pseudo_073"
+  },
+  {
+    "text": "bapgek",
+    "ipa": "/\u02c8b\u00e6p.g\u025bk/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_074"
+  },
+  {
+    "text": "doz",
+    "ipa": "/d\u0251z/",
+    "pattern": "CVC",
+    "id": "pseudo_075"
+  },
+  {
+    "text": "wurov",
+    "ipa": "/\u02c8w\u028c.r\u0251v/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_076"
+  },
+  {
+    "text": "hav",
+    "ipa": "/h\u00e6v/",
+    "pattern": "CVC",
+    "id": "pseudo_077"
+  },
+  {
+    "text": "gozek",
+    "ipa": "/\u02c8g\u0251.z\u025bk/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_078"
+  },
+  {
+    "text": "ris",
+    "ipa": "/r\u026as/",
+    "pattern": "CVC",
+    "id": "pseudo_079"
+  },
+  {
+    "text": "brekad",
+    "ipa": "/\u02c8br\u025b.k\u00e6d/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_080"
+  },
+  {
+    "text": "nal",
+    "ipa": "/n\u00e6l/",
+    "pattern": "CVC",
+    "id": "pseudo_081"
+  },
+  {
+    "text": "fuplob",
+    "ipa": "/\u02c8f\u028cp.l\u0251b/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_082"
+  },
+  {
+    "text": "sut",
+    "ipa": "/s\u028ct/",
+    "pattern": "CVC",
+    "id": "pseudo_083"
+  },
+  {
+    "text": "klikgib",
+    "ipa": "/\u02c8kl\u026ak.g\u026ab/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_084"
+  },
+  {
+    "text": "ped",
+    "ipa": "/p\u025bd/",
+    "pattern": "CVC",
+    "id": "pseudo_085"
+  },
+  {
+    "text": "kuvif",
+    "ipa": "/\u02c8k\u028c.v\u026af/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_086"
+  },
+  {
+    "text": "lud",
+    "ipa": "/l\u028cd/",
+    "pattern": "CVC",
+    "id": "pseudo_087"
+  },
+  {
+    "text": "kenin",
+    "ipa": "/\u02c8k\u025b.n\u026an/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_088"
+  },
+  {
+    "text": "wev",
+    "ipa": "/w\u025bv/",
+    "pattern": "CVC",
+    "id": "pseudo_089"
+  },
+  {
+    "text": "rossap",
+    "ipa": "/\u02c8r\u0251s.s\u00e6p/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_090"
+  },
+  {
+    "text": "rof",
+    "ipa": "/r\u0251f/",
+    "pattern": "CVC",
+    "id": "pseudo_091"
+  },
+  {
+    "text": "brozrob",
+    "ipa": "/\u02c8br\u0251z.r\u0251b/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_092"
+  },
+  {
+    "text": "gon",
+    "ipa": "/g\u0251n/",
+    "pattern": "CVC",
+    "id": "pseudo_093"
+  },
+  {
+    "text": "pevbep",
+    "ipa": "/\u02c8p\u025bv.b\u025bp/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_094"
+  },
+  {
+    "text": "lob",
+    "ipa": "/l\u0251b/",
+    "pattern": "CVC",
+    "id": "pseudo_095"
+  },
+  {
+    "text": "heled",
+    "ipa": "/\u02c8h\u025b.l\u025bd/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_096"
+  },
+  {
+    "text": "kul",
+    "ipa": "/k\u028cl/",
+    "pattern": "CVC",
+    "id": "pseudo_097"
+  },
+  {
+    "text": "halnid",
+    "ipa": "/\u02c8h\u00e6l.n\u026ad/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_098"
+  },
+  {
+    "text": "zam",
+    "ipa": "/z\u00e6m/",
+    "pattern": "CVC",
+    "id": "pseudo_099"
+  },
+  {
+    "text": "bobtot",
+    "ipa": "/\u02c8b\u0251b.t\u0251t/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_100"
+  },
+  {
+    "text": "fiv",
+    "ipa": "/f\u026av/",
+    "pattern": "CVC",
+    "id": "pseudo_101"
+  },
+  {
+    "text": "hafhil",
+    "ipa": "/\u02c8h\u00e6f.h\u026al/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_102"
+  },
+  {
+    "text": "kas",
+    "ipa": "/k\u00e6s/",
+    "pattern": "CVC",
+    "id": "pseudo_103"
+  },
+  {
+    "text": "pisnum",
+    "ipa": "/\u02c8p\u026as.n\u028cm/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_104"
+  },
+  {
+    "text": "pop",
+    "ipa": "/p\u0251p/",
+    "pattern": "CVC",
+    "id": "pseudo_105"
+  },
+  {
+    "text": "zepov",
+    "ipa": "/\u02c8z\u025b.p\u0251v/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_106"
+  },
+  {
+    "text": "nil",
+    "ipa": "/n\u026al/",
+    "pattern": "CVC",
+    "id": "pseudo_107"
+  },
+  {
+    "text": "pizup",
+    "ipa": "/\u02c8p\u026a.z\u028cp/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_108"
+  },
+  {
+    "text": "fim",
+    "ipa": "/f\u026am/",
+    "pattern": "CVC",
+    "id": "pseudo_109"
+  },
+  {
+    "text": "sasruv",
+    "ipa": "/\u02c8s\u00e6s.r\u028cv/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_110"
+  },
+  {
+    "text": "fok",
+    "ipa": "/f\u0251k/",
+    "pattern": "CVC",
+    "id": "pseudo_111"
+  },
+  {
+    "text": "fubpof",
+    "ipa": "/\u02c8f\u028cb.p\u0251f/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_112"
+  },
+  {
+    "text": "tat",
+    "ipa": "/t\u00e6t/",
+    "pattern": "CVC",
+    "id": "pseudo_113"
+  },
+  {
+    "text": "flizruf",
+    "ipa": "/\u02c8fl\u026az.r\u028cf/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_114"
+  },
+  {
+    "text": "fud",
+    "ipa": "/f\u028cd/",
+    "pattern": "CVC",
+    "id": "pseudo_115"
+  },
+  {
+    "text": "dasfek",
+    "ipa": "/\u02c8d\u00e6s.f\u025bk/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_116"
+  },
+  {
+    "text": "zed",
+    "ipa": "/z\u025bd/",
+    "pattern": "CVC",
+    "id": "pseudo_117"
+  },
+  {
+    "text": "prudgad",
+    "ipa": "/\u02c8pr\u028cd.g\u00e6d/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_118"
+  },
+  {
+    "text": "gop",
+    "ipa": "/g\u0251p/",
+    "pattern": "CVC",
+    "id": "pseudo_119"
+  },
+  {
+    "text": "takif",
+    "ipa": "/\u02c8t\u00e6.k\u026af/",
+    "pattern": "DISYLLABIC",
+    "id": "pseudo_120"
+  }
+]
