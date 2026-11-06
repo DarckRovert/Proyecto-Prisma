@@ -1,20 +1,24 @@
 /**
- * Proyecto Prisma — Main Controller del Banco de Calibración
+ * Proyecto Prisma — Main Controller del Laboratorio Cognitivo
  */
 
 import { PrismaAudioEngine } from './audio-engine.ts';
 import { VisualRenderer } from './visual-renderer.ts';
-import { SynchronizationMeasurement } from './types.ts';
+import { SessionEngine, type SessionPhase } from './session-engine.ts';
+import { db } from './db.ts';
+import batteryData from '../data/study1_pseudowords_battery.json';
+import type { SynchronizationMeasurement, SessionMetadata } from './types.ts';
 
 const canvas = document.getElementById('stimulus-canvas') as HTMLCanvasElement;
 const renderer = new VisualRenderer(canvas);
 const audioEngine = new PrismaAudioEngine();
+const sessionEngine = new SessionEngine(audioEngine, renderer);
 
 let trialCounter = 0;
 let pinkActive = false;
 let binauralActive = false;
 
-// Elementos de UI
+// Elementos de UI - Métricas
 const metricFps = document.getElementById('metric-fps')!;
 const metricFrameBudget = document.getElementById('metric-frame-budget')!;
 const metricBaseLatency = document.getElementById('metric-base-latency')!;
@@ -22,18 +26,37 @@ const metricOutputLatency = document.getElementById('metric-output-latency')!;
 const metricTotalLatency = document.getElementById('metric-total-latency')!;
 const metricBluetooth = document.getElementById('metric-bluetooth')!;
 const logTbody = document.getElementById('log-tbody')!;
+const canvasStatus = document.getElementById('canvas-status')!;
 
+// Navegación Tabs
+const tabBench = document.getElementById('tab-bench') as HTMLButtonElement;
+const tabSession = document.getElementById('tab-session') as HTMLButtonElement;
+const benchActions = document.getElementById('bench-actions')!;
+const sessionActions = document.getElementById('session-actions')!;
+const displayTitle = document.getElementById('display-title')!;
+
+// Overlays de Sesión
+const jolOverlay = document.getElementById('jol-overlay')!;
+const testOverlay = document.getElementById('test-overlay')!;
+const inputRecall = document.getElementById('input-recall') as HTMLInputElement;
+const btnSubmitRecall = document.getElementById('btn-submit-recall') as HTMLButtonElement;
+const progressFill = document.getElementById('session-progress-fill')!;
+const progressText = document.getElementById('session-progress-text')!;
+const phaseText = document.getElementById('session-phase-text')!;
+
+// Botones y controles
 const btnUnlock = document.getElementById('btn-unlock-audio') as HTMLButtonElement;
 const btnFlashBeep = document.getElementById('btn-flash-beep') as HTMLButtonElement;
 const btnDemo = document.getElementById('btn-demo-stimulus') as HTMLButtonElement;
+const btnStartSession = document.getElementById('btn-start-session') as HTMLButtonElement;
+const btnExportTelemetry = document.getElementById('btn-export-telemetry') as HTMLButtonElement;
 const btnTogglePink = document.getElementById('btn-toggle-pink') as HTMLButtonElement;
 const sliderPink = document.getElementById('slider-pink') as HTMLInputElement;
 const btnToggleBinaural = document.getElementById('btn-toggle-binaural') as HTMLButtonElement;
 const sliderBinaural = document.getElementById('slider-binaural') as HTMLInputElement;
 const btnTestStereo = document.getElementById('btn-test-stereo') as HTMLButtonElement;
-const canvasStatus = document.getElementById('canvas-status')!;
 
-// Inicialización
+// Inicialización de Pantalla y Base de Datos
 window.addEventListener('resize', () => renderer.resize());
 renderer.drawFixationCross();
 
@@ -43,7 +66,12 @@ renderer.calibrateDisplayFps().then((fps) => {
   metricFrameBudget.textContent = `${renderer.getFrameDurationMs().toFixed(2)} ms`;
 });
 
-// 2. Desbloquear Audio & Calibrar
+// 2. Sembrar batería inicial en IndexedDB
+db.seedBatteryIfEmpty(batteryData).then((count) => {
+  console.log(`[Database] Batería de ${count} estímulos lista en IndexedDB.`);
+});
+
+// 3. Desbloquear Audio & Calibrar
 async function updateHardwareMetrics() {
   const profile = audioEngine.getHardwareProfile(renderer.getDetectedFps());
   metricBaseLatency.textContent = `${profile.baseLatencyMs.toFixed(1)} ms`;
@@ -68,20 +96,36 @@ btnUnlock.addEventListener('click', async () => {
   }
 });
 
-// 3. Test de Sincronía (Flash + Beep)
+// 4. Pestañas de Navegación
+tabBench.addEventListener('click', () => {
+  tabBench.classList.add('active');
+  tabSession.classList.remove('active');
+  benchActions.style.display = 'grid';
+  sessionActions.style.display = 'none';
+  displayTitle.textContent = 'Monitor de Estímulos';
+});
+
+tabSession.addEventListener('click', () => {
+  tabSession.classList.add('active');
+  tabBench.classList.remove('active');
+  benchActions.style.display = 'none';
+  sessionActions.style.display = 'block';
+  displayTitle.textContent = 'Sesión Experimental (Estudio 1)';
+});
+
+// 5. Test de Sincronía (Flash + Beep)
 btnFlashBeep.addEventListener('click', async () => {
   await audioEngine.unlock();
   await updateHardwareMetrics();
 
   trialCounter++;
-  const trialId = `trial_${trialCounter.toString().padStart(3, '0')}`;
+  const trialId = `bench_${trialCounter.toString().padStart(3, '0')}`;
   canvasStatus.textContent = 'Disparando estímulo sincronizado...';
 
   const beepBuffer = audioEngine.createTestBeepBuffer(880, 0.06);
-  const lookaheadMs = 120; // 120ms para garantizar que entre en el buffer
+  const lookaheadMs = 120;
   const stimulus = audioEngine.scheduleSynchronizedStimulus(beepBuffer, lookaheadMs, 0);
 
-  // Programar frame visual en Canvas
   const measurement = await renderer.scheduleFrameAt(
     stimulus.estimatedVisualPerfTime,
     () => {
@@ -106,9 +150,9 @@ function appendLogRow(m: SynchronizationMeasurement) {
 
   tr.innerHTML = `
     <td>${m.trialId}</td>
-    <td>${renderer.getDetectedFps()} Hz</td>
-    <td>${m.estimatedAudioPerfTime.toFixed(1)} ms</td>
-    <td>${m.actualVisualPerfTime.toFixed(1)} ms</td>
+    <td>Bench Sincronía</td>
+    <td>--</td>
+    <td>--</td>
     <td style="font-weight: bold; color: ${m.withinTolerance ? 'var(--success)' : 'var(--danger)'}">
       ${m.measuredDriftMs > 0 ? '+' : ''}${m.measuredDriftMs.toFixed(2)} ms
     </td>
@@ -118,32 +162,130 @@ function appendLogRow(m: SynchronizationMeasurement) {
   logTbody.insertBefore(tr, logTbody.firstChild);
 }
 
-// 4. Demo Estímulo Dual-Coding
+// 6. Demo Estímulo Dual-Coding
 btnDemo.addEventListener('click', async () => {
   await audioEngine.unlock();
   canvasStatus.textContent = 'Exposición Dual-Coding: vasken';
 
-  // 1. Fijación
   renderer.drawFixationCross();
-
-  // 2. Audio Beep sintetizado para simular fonética nativa
   const sampleAudio = audioEngine.createTestBeepBuffer(520, 0.4);
   const lookaheadMs = 200;
   const stimulus = audioEngine.scheduleSynchronizedStimulus(sampleAudio, lookaheadMs, 0);
 
-  // 3. Render visual en Canvas
   await renderer.scheduleFrameAt(stimulus.estimatedVisualPerfTime, () => {
     renderer.drawStimulus(null, 'vasken', '/ˈvæs.kɛn/');
   });
 
-  // 4. Vuelta a descanso tras 2 segundos
   setTimeout(() => {
     renderer.drawFixationCross();
     canvasStatus.textContent = 'Listo';
   }, 2200);
 });
 
-// 5. Ruido Rosa
+// 7. Configuración de Sesión Experimental
+sessionEngine.setListener({
+  onPhaseChange: (phase: SessionPhase, data?: any) => {
+    phaseText.textContent = `Fase: ${phase.toUpperCase()}`;
+
+    // Manejo de Overlay JOL
+    if (phase === 'jol_prompt') {
+      jolOverlay.style.display = 'block';
+      const btns = jolOverlay.querySelectorAll<HTMLButtonElement>('.btn-jol');
+      btns.forEach((btn) => {
+        btn.onclick = () => {
+          jolOverlay.style.display = 'none';
+          const val = parseInt(btn.getAttribute('data-val') || '3', 10);
+          data.onSubmitJol(val);
+        };
+      });
+    } else {
+      jolOverlay.style.display = 'none';
+    }
+
+    // Manejo de Overlay Recuperación Activa
+    if (phase === 'testing_active') {
+      testOverlay.style.display = 'block';
+      inputRecall.value = '';
+      inputRecall.focus();
+
+      const submit = () => {
+        testOverlay.style.display = 'none';
+        data.onAnswer(inputRecall.value);
+      };
+
+      btnSubmitRecall.onclick = submit;
+      inputRecall.onkeydown = (e) => {
+        if (e.key === 'Enter') submit();
+      };
+    } else {
+      testOverlay.style.display = 'none';
+    }
+
+    // Actualizar log en caso de feedback
+    if (phase === 'feedback' && data) {
+      appendSessionLogRow(data);
+    }
+  },
+
+  onProgress: (current: number, total: number) => {
+    const pct = total > 0 ? (current / total) * 100 : 0;
+    progressFill.style.width = `${pct}%`;
+    progressText.textContent = `Progreso: ${current} / ${total}`;
+  },
+
+  onSessionComplete: (metadata: SessionMetadata) => {
+    btnStartSession.disabled = false;
+    btnStartSession.textContent = '▶️ Iniciar Nueva Sesión';
+    alert(`¡Sesión Completada!\n\nÍtems procesados: ${metadata.totalTrials}\nPrecisión: ${(metadata.accuracyRate * 100).toFixed(0)}%\nLatencia media: ${metadata.averageLatencyMs} ms`);
+  }
+});
+
+function appendSessionLogRow(data: any) {
+  const tr = document.createElement('tr');
+  const isCorrect = data.accuracy;
+  const gradeNames = ['', 'Again (1)', 'Hard (2)', 'Good (3)', 'Easy (4)'];
+
+  tr.innerHTML = `
+    <td>${data.stimulus.id}</td>
+    <td>Prisma Activo</td>
+    <td>${data.gradeResult?.reason || '--'}</td>
+    <td style="color: ${isCorrect ? 'var(--success)' : 'var(--danger)'}">
+      ${isCorrect ? 'Correcto' : 'Error'}
+    </td>
+    <td><span class="badge ${isCorrect ? 'badge-ok' : 'badge-warn'}">${gradeNames[data.gradeResult?.grade] || 'Good'}</span></td>
+    <td><span class="badge badge-ok">GUARDADO</span></td>
+  `;
+
+  logTbody.insertBefore(tr, logTbody.firstChild);
+}
+
+btnStartSession.addEventListener('click', async () => {
+  await audioEngine.unlock();
+  await updateHardwareMetrics();
+
+  btnStartSession.disabled = true;
+  btnStartSession.textContent = 'Sesión en curso...';
+
+  // Cargar primeros 10 estímulos de la base local para la sesión
+  const allStimuli = await db.stimuli.toArray();
+  const sessionItems = allStimuli.slice(0, 10);
+
+  await sessionEngine.startSession(sessionItems, 'experimental_study');
+});
+
+// 8. Exportar Telemetría a JSON
+btnExportTelemetry.addEventListener('click', async () => {
+  const jsonStr = await db.exportAllTelemetry();
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `prisma_telemetry_${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+// 9. Controles de Audio Ambiental
 btnTogglePink.addEventListener('click', async () => {
   await audioEngine.unlock();
   pinkActive = !pinkActive;
@@ -153,12 +295,9 @@ btnTogglePink.addEventListener('click', async () => {
 });
 
 sliderPink.addEventListener('input', () => {
-  if (pinkActive) {
-    audioEngine.setPinkNoise(true, parseFloat(sliderPink.value));
-  }
+  if (pinkActive) audioEngine.setPinkNoise(true, parseFloat(sliderPink.value));
 });
 
-// 6. Binaural Beat 20Hz
 btnToggleBinaural.addEventListener('click', async () => {
   await audioEngine.unlock();
   binauralActive = !binauralActive;
@@ -168,15 +307,12 @@ btnToggleBinaural.addEventListener('click', async () => {
 });
 
 sliderBinaural.addEventListener('input', () => {
-  if (binauralActive) {
-    audioEngine.setBinauralBeat(true, 210, 20, parseFloat(sliderBinaural.value));
-  }
+  if (binauralActive) audioEngine.setBinauralBeat(true, 210, 20, parseFloat(sliderBinaural.value));
 });
 
-// 7. Test Estéreo L/R
 btnTestStereo.addEventListener('click', async () => {
   await audioEngine.unlock();
-  btnTestStereo.textContent = '🔊 Reproduciendo Izquierda -> Derecha...';
+  btnTestStereo.textContent = '🔊 Reproduciendo L -> R...';
   await audioEngine.verifyStereoChannels();
   btnTestStereo.textContent = '🎧 Verificar Canales L / R';
 });

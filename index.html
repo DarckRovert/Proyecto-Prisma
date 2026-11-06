@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyecto Prisma — Banco de Calibración Audiovisual</title>
+  <title>Proyecto Prisma — Laboratorio Cognitivo & Calibración</title>
   <style>
     :root {
       --bg: #090d16;
@@ -14,6 +14,7 @@
       --accent: #38bdf8;
       --success: #34d399;
       --danger: #f87171;
+      --warning: #fbbf24;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -27,6 +28,9 @@
       margin-bottom: 24px;
       border-bottom: 1px solid var(--border);
       padding-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
     }
     .header h1 {
       font-size: 1.5rem;
@@ -38,6 +42,25 @@
       color: var(--muted);
       font-size: 0.875rem;
       margin-top: 4px;
+    }
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+    }
+    .tab-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: #0284c7;
+      color: #fff;
+      border-color: #0369a1;
+      font-weight: 600;
     }
     .grid {
       display: grid;
@@ -77,6 +100,18 @@
       height: 100%;
       display: block;
     }
+    .overlay-panel {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      background: rgba(17, 24, 39, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      display: none;
+    }
     .metric-row {
       display: flex;
       justify-content: space-between;
@@ -109,11 +144,27 @@
       color: #fff;
     }
     .btn-primary:hover { background: #0369a1; }
+    .btn-success {
+      background: #059669;
+      border-color: #047857;
+      color: #fff;
+    }
+    .btn-success:hover { background: #047857; }
     .btn-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
       margin-top: 8px;
+    }
+    .btn-ratings {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .btn-ratings .btn {
+      flex: 1;
+      font-weight: 700;
+      margin-bottom: 0;
     }
     .control-row {
       margin-top: 10px;
@@ -124,9 +175,21 @@
       display: block;
       margin-bottom: 4px;
     }
-    input[type="range"] {
+    input[type="range"], input[type="text"] {
       width: 100%;
       accent-color: var(--accent);
+    }
+    input[type="text"] {
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    input[type="text"]:focus {
+      border-color: var(--accent);
     }
     .log-table {
       width: 100%;
@@ -154,46 +217,107 @@
     }
     .badge-ok { background: rgba(52, 211, 153, 0.2); color: var(--success); }
     .badge-warn { background: rgba(248, 113, 113, 0.2); color: var(--danger); }
+    .progress-bar {
+      height: 6px;
+      background: #1e293b;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 12px;
+      margin-bottom: 8px;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>PROYECTO PRISMA — BANCO DE CALIBRACIÓN AV</h1>
-    <p>Validación de latencia de hardware, detección de FPS de pantalla y sincronización milimétrica</p>
+    <div>
+      <h1>PROYECTO PRISMA — LABORATORIO COGNITIVO</h1>
+      <p>Estimulación Audiovisual Sincronizada, Dual-Coding y Repetición Espaciada FSRS-7</p>
+    </div>
+    <div class="nav-tabs">
+      <button id="tab-bench" class="tab-btn active">Calibración & Hardware</button>
+      <button id="tab-session" class="tab-btn">Sesión Experimental</button>
+    </div>
   </div>
 
   <div class="grid">
     <div>
       <div class="card">
         <div class="card-title">
-          <span>Monitor de Renderizado de Estímulos</span>
+          <span id="display-title">Monitor de Estímulos</span>
           <span id="canvas-status" style="font-size: 0.75rem; font-weight: normal; color: var(--muted);">Listo</span>
         </div>
+
         <div class="canvas-container">
           <canvas id="stimulus-canvas"></canvas>
+
+          <!-- Overlay JOL: Judgment of Learning -->
+          <div id="jol-overlay" class="overlay-panel">
+            <p style="font-size: 0.85rem; font-weight: 600; text-align: center; margin-bottom: 8px;">
+              ¿Qué tan seguro estás de recordar esta palabra?
+            </p>
+            <div class="btn-ratings">
+              <button class="btn btn-jol" data-val="1">1 (Nada)</button>
+              <button class="btn btn-jol" data-val="2">2</button>
+              <button class="btn btn-jol" data-val="3">3</button>
+              <button class="btn btn-jol" data-val="4">4</button>
+              <button class="btn btn-jol" data-val="5">5 (Seguro)</button>
+            </div>
+          </div>
+
+          <!-- Overlay Test: Recuperación Activa -->
+          <div id="test-overlay" class="overlay-panel">
+            <p style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">
+              Recuperación Activa: Escribe la palabra que recuerdas
+            </p>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="input-recall" placeholder="Escribe aquí..." autocomplete="off" />
+              <button id="btn-submit-recall" class="btn btn-primary" style="width: 120px; margin-bottom: 0;">Enviar</button>
+            </div>
+          </div>
         </div>
-        <div class="btn-group" style="margin-top: 12px;">
+
+        <div id="bench-actions" class="btn-group" style="margin-top: 12px;">
           <button id="btn-flash-beep" class="btn btn-primary">⚡ Flash + Beep Sincronizado</button>
           <button id="btn-demo-stimulus" class="btn">👁️ Estímulo Dual-Coding Demo</button>
+        </div>
+
+        <div id="session-actions" style="display: none; margin-top: 12px;">
+          <button id="btn-start-session" class="btn btn-success">▶️ Iniciar Sesión Piloto (10 Ítems Balanceados)</button>
+          <div class="progress-bar">
+            <div id="session-progress-fill" class="progress-fill"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted);">
+            <span id="session-progress-text">Progreso: 0 / 10</span>
+            <span id="session-phase-text">Fase: Reposo</span>
+          </div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">Historial de Sincronización (Últimos Ensayos)</div>
+        <div class="card-title">
+          <span>Telemetría de Ensayos Registrados</span>
+          <button id="btn-export-telemetry" class="btn" style="width: auto; padding: 4px 10px; font-size: 0.75rem; margin-bottom: 0;">📥 Exportar Telemetría JSON</button>
+        </div>
         <table class="log-table">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Refresco</th>
-              <th>Audio Target</th>
-              <th>Visual Target</th>
-              <th>Drift Medido</th>
+              <th>Modo / Condición</th>
+              <th>Latencia</th>
+              <th>Acierto</th>
+              <th>FSRS Grado</th>
               <th>Estado</th>
             </tr>
           </thead>
           <tbody id="log-tbody">
             <tr>
-              <td colspan="6" style="text-align: center; color: var(--muted);">Presiona "Flash + Beep" para iniciar mediciones.</td>
+              <td colspan="6" style="text-align: center; color: var(--muted);">No hay interacciones registradas aún.</td>
             </tr>
           </tbody>
         </table>
@@ -202,7 +326,7 @@
 
     <div>
       <div class="card">
-        <div class="card-title">Hardware & Reloj</div>
+        <div class="card-title">Hardware & Latencias</div>
         <button id="btn-unlock-audio" class="btn btn-primary" style="margin-bottom: 12px;">🔊 Activar Audio & Calibrar</button>
         
         <div class="metric-row">
