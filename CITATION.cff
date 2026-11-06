@@ -8,7 +8,7 @@ authors:
 version: "0.1.0"
 date-released: 2026-11-05
 license: "MIT"
-repository-code: "https://github.com/DarckRovert/proyecto-prisma"
+repository-code: "https://github.com/DarckRovert/Proyecto-Prisma"
 keywords:
   - "cognitive science"
   - "spaced repetition"

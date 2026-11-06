@@ -39,8 +39,8 @@ Plataforma de investigación y software en Ciencias Cognitivas y Tecnologías de
 ### Pasos
 ```bash
 # 1. Clonar repositorio
-git clone https://github.com/DarckRovert/proyecto-prisma.git
-cd proyecto-prisma
+git clone https://github.com/DarckRovert/Proyecto-Prisma.git
+cd Proyecto-Prisma
 
 # 2. Instalar dependencias
 npm install
@@ -78,7 +78,20 @@ run_tests.bat
 
 ---
 
+## Estado del Proyecto y Hoja de Ruta
+
+| Fase | Descripción | Estado |
+| :--- | :--- | :--- |
+| **Fase 0** | Pre-registro científico congelado, generador fonotáctico GenAm y triple filtro léxico | ✅ Completada |
+| **Fase 1** | Motor AV de alta precisión (AudioWorklet ruido rosa, pulso beta 20 Hz, Canvas sub-frame) | ✅ Completada |
+| **Fase 2** | Motor de sesión FSRS-7, interleaving buffer (lag 2-4) y persistencia IndexedDB (Dexie) | ✅ Completada |
+| **Fase 3** | Banco de calibración interactivo y analizador estadístico de telemetría piloto | 🟡 Servidor activo (`:3000`) |
+| **Fase 4** | Estudio 1 formal N=1 (120 pseudopalabras, retención a 24h y 7 días, modelo GLMM) | ⏳ Próxima fase |
+| **Fase 5** | Interfaz de curación rápida para profesor (`review.html`) y Estudios 2 y 3 ciegos | ⏳ Planificada |
+
+---
+
 ## Pre-registro y Licencia
 
-El diseño de los experimentos 1, 2 y 3 se encuentra congelado en [`docs/PREREGISTRATION.md`](docs/PREREGISTRATION.md).  
+El diseño de los experimentos 1, 2 y 3 se encuentra formalmente congelado en [`docs/PREREGISTRATION.md`](docs/PREREGISTRATION.md).  
 Licencia: MIT.
