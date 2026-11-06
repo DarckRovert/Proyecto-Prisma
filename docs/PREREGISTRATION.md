@@ -2,7 +2,7 @@
 
 **Fecha de Congelamiento:** 2026-11-05T21:55:00-05:00  
 **Estado:** PROTOCOLO CONGELADO (Pre-data collection)  
-**Investigador Principal:** Usuario / Claude Mythos 5  
+**Investigador Principal:** Rodrigo Alejandro Vega Rojas (ORCID: [0009-0002-4337-7767](https://orcid.org/0009-0002-4337-7767))  
 **Marco Regulatorio:** Ley 29733 y D.S. 016-2024-JUS (Perú) — Datos de salud excluidos, anonimización por hash.
 
 ---

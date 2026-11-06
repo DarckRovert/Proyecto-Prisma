@@ -1,5 +1,11 @@
 # Proyecto Prisma
 
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0002--4337--7767-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0009-0002-4337-7767)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/Tests-Passing%20(Local%20Sovereign)-brightgreen.svg)]()
+
+**Investigador Principal:** Rodrigo Alejandro Vega Rojas ([ORCID: 0009-0002-4337-7767](https://orcid.org/0009-0002-4337-7767))
+
 Plataforma de investigación y software en Ciencias Cognitivas y Tecnologías del Aprendizaje (EdTech), orientada a acelerar la adquisición y retención a largo plazo de vocabulario y estructuras en nuevos idiomas (General American English).
 
 ---

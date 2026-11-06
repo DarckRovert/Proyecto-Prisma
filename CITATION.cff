@@ -2,8 +2,9 @@ cff-version: 1.2.0
 message: "If you use this software or experimental protocol, please cite it as below."
 title: "Proyecto Prisma: Plataforma de Adquisición de Vocabulario y Estructuras en L2 mediante Estimulación Audiovisual Sincronizada y FSRS-7"
 authors:
-  - family-names: "DarckRovert"
-    given-names: ""
+  - family-names: "Vega Rojas"
+    given-names: "Rodrigo Alejandro"
+    orcid: "https://orcid.org/0009-0002-4337-7767"
 version: "0.1.0"
 date-released: 2026-11-05
 license: "MIT"
